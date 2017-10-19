@@ -140,15 +140,6 @@
 
 .fixed-table-container .no-records-found {
     text-align: center;
-    position: relative;
-}
-.no-records-found .cover-line {
-    position: absolute;
-    bottom: -1px;
-    left: 0;
-    width: 100%;
-    height: 2px;
-    background: #fff;
 }
 
 .fixed-table-pagination div.pagination,

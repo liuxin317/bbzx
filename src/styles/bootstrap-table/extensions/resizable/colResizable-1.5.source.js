@@ -60,7 +60,7 @@
 		t.p = t.opt.postbackSafe; 							//short-cut to detect postback safe 		
 		if(!t.is("table") || tables[id] && !t.opt.partialRefresh) return; 		//if the object is not a table or if it was already processed then it is ignored.
 		t.addClass(SIGNATURE).attr(ID, id).before('<div class="JCLRgrips"/>');	//the grips container object is added. Signature class forces table rendering in fixed-layout mode to prevent column's min-width
-		t.g = []; t.c = []; t.w = t.width(); t.gc = t.prev(); t.f=t.opt.fixed;	//t.c and t.g are arrays of columns and grips respectively				
+		t.g = []; t.c = []; t.w = t.width(); t.gc = t.prev(); t.f=t.opt.fixed;	//t.c and t.g are arrays of columns and grips respectively
 		if(options.marginLeft) t.gc.css("marginLeft", options.marginLeft);  	//if the table contains margins, it must be specified
 		if(options.marginRight) t.gc.css("marginRight", options.marginRight);  	//since there is no (direct) way to obtain margin values in its original units (%, em, ...)
 		t.cs = I(ie? tb.cellSpacing || tb.currentStyle.borderSpacing :t.css('border-spacing'))||2;	//table cellspacing (not even jQuery is fully cross-browser)
@@ -101,8 +101,9 @@
 			var g = $(t.gc.append('<div class="JCLRgrip"></div>')[0].lastChild); //add the visual node to be used as grip
             g.append(t.opt.gripInnerHtml).append('<div class="'+SIGNATURE+'"></div>');
             if(i == t.ln-1){
-                g.addClass("JCLRLastGrip"); 
-                if(t.f) g.html("");
+                g.addClass("JCLRLastGrip");
+                // 最后一列也允许拖动
+                // if(t.f) g.html("");
             }
             g.bind('touchstart mousedown', onGripMouseDown); //bind the mousedown event to start dragging 
 
@@ -165,13 +166,13 @@
 	 * @param {jQuery ref} t - table object
 	 */
 	var syncGrips = function (t){	
-		t.gc.width(t.w);			//the grip's container width is updated				
+		t.gc.width(t.w);			//the grip's container width is updated
 		for(var i=0; i<t.ln; i++){	//for each column
 			var c = t.c[i]; 			
 			t.g[i].css({			//height and position of the grip is updated according to the table layout
 				left: c.offset().left - t.offset().left + c.outerWidth(false) + t.cs / 2 + PX,
-				height: t.opt.headerOnly? t.c[0].outerHeight(true) : t.outerHeight(true)				
-			});			
+				height: t.opt.headerOnly? t.c[0].outerHeight(true) : t.outerHeight(true)
+			});
 		} 	
 	};
 	
@@ -186,18 +187,35 @@
 	* @param {bool} isOver - to identify when the function is being called from the onGripDragOver event	
 	*/
 	var syncCols = function(t,i,isOver){
-		var inc = drag.x-drag.l, c = t.c[i], c2 = t.c[i+1]; 			
-		var w = c.w + inc;	var w2= c2.w- inc;	//their new width is obtained					
-		c.width( w + PX);			
-		t.cg.eq(i).width( w + PX); 
-        if(t.f){ //if fixed mode
-            c2.width(w2 + PX);
-            t.cg.eq(i+1).width( w2 + PX);
-        }
+		// var inc = drag.x-drag.l, c = t.c[i], c2 = t.c[i+1];
+		// var w = c.w + inc;	var w2= c2.w- inc;	//their new width is obtained
+		// c.width( w + PX);
+		// t.cg.eq(i).width( w + PX);
+     //    if(t.f){ //if fixed mode
+     //        c2.width(w2 + PX);
+     //        t.cg.eq(i+1).width( w2 + PX);
+     //    }
+		// if(isOver){
+     //        c.w=w;
+     //        c2.w= t.f ? w2 : c2.w;
+     //    }
+		// 原来拖动竖线会影响左右两侧列的宽度，修改为只影响左侧的宽度20170724
+		var inc = drag.x-drag.l, c = t.c[i], c2 = t.c[i+1];
+		var w = c.w + inc;	var w2= c2.w;	//their new width is obtained
+		c.width( w + PX);
+		t.cg.eq(i).width( w + PX);
+		// 重设table宽度
+		t.w = t.w + inc;
+		t.width(t.w);
+
+		if(t.f){ //if fixed mode
+			c2.width(w2 + PX);
+			t.cg.eq(i+1).width( w2 + PX);
+		}
 		if(isOver){
-            c.w=w; 
-            c2.w= t.f ? w2 : c2.w;
-        }
+			c.w=w;
+			c2.w= t.f ? w2 : c2.w;
+		}
 	};
 
 	
@@ -237,7 +255,9 @@
 			i == t.ln-1? 
 				t.w-l: 
 				t.g[i+1].position().left-t.cs-mw:
-			Infinity; 								//max position according to the contiguous cells 
+			Infinity; 								//max position according to the contiguous cells
+		// 不设置最大值
+		max = Infinity;
 		x = M.max(min, M.min(max, x));				//apply bounding		
 		drag.x = x;	 drag.css("left",  x + PX); 	//apply position increment	
         if(last){									//if it is the last grip

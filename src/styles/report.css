@@ -660,6 +660,9 @@ tbody tr:nth-child(2n+1) {
 .searchblock {
   margin-right: 5px;
 }
+.searchblock {
+  float: left;
+}
 .p-n .caret {
   border: inherit;
   border-top: 4px dashed;

@@ -269,15 +269,15 @@
         },
         pagination: false,
         onlyInfoPagination: false,
-        paginationLoop: false,
+        paginationLoop: true,
         sidePagination: 'client', // client or server
         totalRows: 0, // server side need to set
         pageNumber: 1,
         pageSize: 10,
         pageList: [10, 25, 50, 100],
-        paginationHAlign: 'left', //right, left
+        paginationHAlign: 'right', //right, left
         paginationVAlign: 'bottom', //bottom, top, both
-        paginationDetailHAlign: 'right', //right, left
+        paginationDetailHAlign: 'left', //right, left
         paginationHasfirstandlast:false,
         paginationPreText: '&lsaquo;',
         paginationNextText: '&rsaquo;',
@@ -802,10 +802,10 @@
 
         this.$selectAll = this.$header.find('[name="btSelectAll"]');
         this.$selectAll.off('click').on('click', function () {
-            var checked = $(this).prop('checked');
-            that[checked ? 'checkAll' : 'uncheckAll']();
-            that.updateSelected();
-        });
+                var checked = $(this).prop('checked');
+                that[checked ? 'checkAll' : 'uncheckAll']();
+                that.updateSelected();
+            });
     };
 
     BootstrapTable.prototype.initFooter = function () {
@@ -957,7 +957,7 @@
 
         if (this.options.showPaginationSwitch) {
             html.push(sprintf('<button class="btn btn-default" type="button" name="paginationSwitch" title="%s">',
-                this.options.formatPaginationSwitch()),
+                    this.options.formatPaginationSwitch()),
                 sprintf('<i class="%s %s"></i>', this.options.iconsPrefix, this.options.icons.paginationSwitchDown),
                 '</button>');
         }
@@ -966,7 +966,7 @@
             html.push(sprintf('<button class="btn btn-default' +
                     sprintf(' btn-%s', this.options.iconSize) +
                     '" type="button" name="refresh" title="%s">',
-                this.options.formatRefresh()),
+                    this.options.formatRefresh()),
                 sprintf('<i class="%s %s"></i>', this.options.iconsPrefix, this.options.icons.refresh),
                 '</button>');
         }
@@ -975,14 +975,14 @@
             html.push(sprintf('<button class="btn btn-default' +
                     sprintf(' btn-%s', this.options.iconSize) +
                     '" type="button" name="toggle" title="%s">',
-                this.options.formatToggle()),
+                    this.options.formatToggle()),
                 sprintf('<i class="%s %s"></i>', this.options.iconsPrefix, this.options.icons.toggle),
                 '</button>');
         }
 
         if (this.options.showColumns) {
             html.push(sprintf('<div class="keep-open btn-group" title="%s">',
-                this.options.formatColumns()),
+                    this.options.formatColumns()),
                 '<button type="button" class="btn btn-default' +
                 sprintf(' btn-%s', this.options.iconSize) +
                 ' dropdown-toggle" data-toggle="dropdown">',
@@ -1033,8 +1033,8 @@
         if (this.options.showToggle) {
             this.$toolbar.find('button[name="toggle"]')
                 .off('click').on('click', function () {
-                that.toggleView();
-            });
+                    that.toggleView();
+                });
         }
 
         if (this.options.showColumns) {
@@ -1265,17 +1265,17 @@
             html.push(this.options.formatRecordsPerPage(pageNumber.join('')));
             html.push('</span>');
             html.push('<span class="pagination-info" style="padding-left: 10px;">',
-                this.options.onlyInfoPagination ? this.options.formatDetailPagination(this.options.totalRows) :
-                    this.options.formatShowingRows(this.pageFrom, this.pageTo, this.options.totalRows),
+            this.options.onlyInfoPagination ? this.options.formatDetailPagination(this.options.totalRows) :
+                this.options.formatShowingRows(this.pageFrom, this.pageTo, this.options.totalRows),
                 '</span><span>当前'+this.options.pageNumber+'/'+this.totalPages+'</span>页');
 
-
-            var flstr="";
-            if (this.options.paginationHasfirstandlast) {
-                flstr='<li class="page-first"><a href="javascript:void(0)">首页 </a></li>';
-            }
-
-
+			
+			var flstr="";
+			if (this.options.paginationHasfirstandlast) {
+				flstr='<li class="page-first"><a href="javascript:void(0)">首页 </a></li>';
+			}
+			
+			
             html.push('</div>',
                 '<div class="pull-' + this.options.paginationHAlign + ' pagination">',
                 '<ul class="pagination' + sprintf(' pagination-%s', this.options.iconSize) + '">',
@@ -1357,17 +1357,17 @@
                         '</li>');
                 }
             }
-            var flstr="";
-            if (this.options.paginationHasfirstandlast) {
-                flstr='<li class="page-last"><a href="javascript:void(0)">尾页</a></li>';
-            }
+			var flstr="";
+			if (this.options.paginationHasfirstandlast) {
+				flstr='<li class="page-last"><a href="javascript:void(0)">尾页</a></li>';
+			}
             html.push(
                 '<li class="page-next"><a href="javascript:void(0)">' + this.options.paginationNextText + '</a></li>',
                 flstr,
                 '</ul>',
                 '</div>'
-                +'<div class="pagination jump-wrap">跳转到 <input id="jumpNum" class="jump-num" type="number" step="1" min="1" max="'+this.totalPages+'" value="'+this.options.pageNumber+'">页' +
-                '<button id="jump" class="jump-btn" type="button">跳转</button></div>');
+                +'<div class="pagination jump-wrap">跳转到 <input id="jumpNum" type="number" step="1" min="1" max="'+this.totalPages+'" value="'+this.options.pageNumber+'">页' +
+                '<button id="jump" type="button">跳转</button></div>');
         }
         this.$pagination.html(html.join(''));
 
@@ -1409,8 +1409,7 @@
             $next.off('click').on('click', $.proxy(this.onPageNext, this));
             $last.off('click').on('click', $.proxy(this.onPageLast, this));
             $number.off('click').on('click', $.proxy(this.onPageNumber, this));
-            // $('body').find('#jump').off('click').on('click', $.proxy(this.onPageNumber2, this));
-            this.$container.find('.jump-btn').off('click').on('click', $.proxy(this.onPageNumber2, this));
+            $('body').find('#jump').off('click').on('click', $.proxy(this.onPageNumber2, this));
         }
     };
 
@@ -1482,7 +1481,7 @@
     };
 
     BootstrapTable.prototype.onPageNumber2 = function (event) {
-        var number = parseInt(this.$container.find('.jump-num').val());
+        var number = parseInt($('#jumpNum').val());
         if (this.options.pageNumber == number) {
             return;
         }
@@ -1679,7 +1678,7 @@
         // show no records
         if (!html.length) {
             html.push('<tr class="no-records-found">',
-                sprintf('<td colspan="%s">%s<div class="cover-line"></div></td>',
+                sprintf('<td colspan="%s">%s</td>',
                     this.$header.find('th').length, this.options.formatNoMatches()),
                 '</tr>');
         }
@@ -2022,7 +2021,7 @@
             }
 
             that.$header_.find(sprintf('th[data-field="%s"]', visibleFields[index]))
-                .innerWidth($this.innerWidth());
+              .innerWidth($this.innerWidth());
         });
         // horizontal scroll event
         // TODO: it's probably better improving the layout than binding to scroll event

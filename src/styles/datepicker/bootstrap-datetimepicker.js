@@ -119,12 +119,6 @@
     this._attachEvents();
 
     this.clickedOutside = function (e) {
-      // 点击旁边日历图标，不关闭日期面板
-      if ($(e.target).hasClass('cal-icon')) {
-        if ($(e.target).siblings('.form_datetime').eq(0).is(that.element)) {
-          return ;
-        }
-      }
     	//にまび
         if ($(e.target).closest('.datetimepicker').length === 0&&!(that.element.is($(e.target)))) {
             that.hide();
@@ -393,11 +387,6 @@
         date: this.date
       });
     },
-
-    // 获取日期面板是否在打开状态
-    getVisible: function () {
-      return this.isVisible;
-		},
 
     remove: function () {
       this._detachEvents();
