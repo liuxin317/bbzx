@@ -10,14 +10,6 @@ import React, { Component } from 'react';
 import Zcfzb from './views/zcfzb.js';
 import Load from './common/loading.js';
 
-// 路由相关
-import createHistory from 'history/createBrowserHistory';
-import { Route } from 'react-router';
-import { ConnectedRouter, push } from 'react-router-redux';
-
-
-const history = creacteHistory();
-
 class App extends Component {
   constructor (props) {
     super(props)
@@ -25,13 +17,10 @@ class App extends Component {
 
   render() {
     return (
-      <ConnectedRouter>
-        <div>
-          <Load state={false} />
-          <Route exact path="/" component={Zcfzb}></Route>
-          <Route path="/Page"></Route>
-        </div>
-      </ConnectedRouter>
+      <div>
+        <Load state={this.props.store.maskStatus} />
+        <Zcfzb />
+      </div>
     )
   }
 }

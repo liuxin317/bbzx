@@ -10,7 +10,7 @@ import types from './actionTypes/types.js';
 //action请求
 Store.dispatch({ type: types.maskStatus, payload: true })
 // setTimeout( () => {  }, 1000);
-// console.log(Store.getState());
+
 
 // Render the main component into the dom
 const render = () => ReactDOM.render(
