@@ -1,99 +1,60 @@
 import React from 'react';
 import { $http } from './http.js';
+require('../styles/bootstrap/js/bootstrap.min.js');
 
 class Linkage extends React.Component {
   constructor (props) {
     super(props);
     this.state = {
-      soltsukolist: [{ // 租户列表;
-                      'key': 0,
-                      'bussLicenseNo': null,
-                      'tenantCode': '',
-                      'tenantId': '',
-                      'tenantName': '全部'
-                    }],
+      soltsukolist: [],
       initialSoltsukolist: [], // 初始租户列表;
       soltsukolistChoose: '', // 当前的租户;
       tenantId: '', // 当前租户id
-      companylist: [{ // 公司列表;
-                      'key': 0,
-                      'companyCode': undefined,
-                      'companyDesc': null,
-                      'companyId': '',
-                      'companyName': '全部',
-                      'tenantCode': null,
-                      'tenantId': '',
-                      'tenantName': null
-                    }],
+      companylist: [],
       initialCompanylist: [], // 初始化公司列表;
       companylistChoose: '' // 当前公司;
     }
   }
 
   componentDidMount () {
-    this.resetdroplist();
-    this.resetdroplist2();
-  }
-
-  // 获取租户列表;
-  resetdroplist () {
-    $http('POST', {
-      addr: 'getTenantListData'
-    }, (data) => {
-      let init = this.state.soltsukolist;
-      if (data.data && data.data.length) {
-        data.data.forEach(function (item, index) {
-          item.key = index + 1;
-          item.tenantName = item.tenantCode + ' ' + item.tenantName;
-        });
-      }
-
-      this.setState({
-        soltsukolist: init.concat(data.data),
-        initialSoltsukolist: init.concat(data.data)
-      })
-    })
-  }
-
-  resetdroplist2 () { // 公司接口;
-    $http('POST', {
+    this.props.getResetdroplist({addr: 'getTenantListData'});
+    this.props.getCompanylist({
       addr: 'getTenantCoPageData2',
       keyword: '',
       tenantId: this.state.tenantId,
       pageSize: 20000000,
       pageNumber: 1
-    }, (data) => {
-      let init = [{ // 公司列表;
-                    'key': 0,
-                    'companyCode': undefined,
-                    'companyDesc': null,
-                    'companyId': '',
-                    'companyName': '全部',
-                    'tenantCode': null,
-                    'tenantId': '',
-                    'tenantName': null
-                 }];
-      if (data.data.rows && data.data.rows.length) {
-        data.data.rows.forEach(function (item, index) {
-          item.key = index + 1;
-          item.companyName = item.companyCode + ' ' + item.companyName;
-        });
-      }
+    })
+  }
 
-      this.setState({
-        companylist: init.concat(data.data.rows),
-        initialCompanylist: init.concat(data.data.rows)
-      })
+  componentWillReceiveProps () {
+    let tenant = this.props.tenant();
+    let company = this.props.company();
+
+    this.setState({
+      initialSoltsukolist: tenant,
+      initialCompanylist: company,
+      soltsukolist: tenant,
+      companylist: company
     })
   }
 
   selTenant (item) { // 租户选择;
+    this.props.clearData(); // 清空公司数据;
+
+
     this.setState({
       tenantId: item.tenantId,
       soltsukolistChoose: item.tenantName,
       companylistChoose: ''
     }, () => {
-      this.resetdroplist2()
+      this.props.getCompanylist({
+        addr: 'getTenantCoPageData2',
+        keyword: '',
+        tenantId: item.tenantId,
+        pageSize: 20000000,
+        pageNumber: 1
+      })
     })
   }
 
@@ -174,14 +135,14 @@ class Linkage extends React.Component {
             <button type="button" className="btn btn-danger" data-toggle="dropdown">
               {this.state.soltsukolistChoose === '' ? '全部' : this.state.soltsukolistChoose}
             </button>
-            <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style={{ backgroundColor: '#f3f3f3' }}>
               <span className="caret"></span>
               <span className="sr-only">Toggle Dropdown</span>
             </button>
             <ul className="dropdown-menu">
               <input style={{width:'100%'}} onKeyUp={this.searchTenantList.bind(this)} placeholder="输入关键字查询" />
                 {
-                  soltsukolist.map((item) => {
+                  soltsukolist ? soltsukolist.map((item) => {
                     return (
                       item.display
                       ?
@@ -192,6 +153,7 @@ class Linkage extends React.Component {
                       </li>
                     )
                   })
+                  : ''
                 }
             </ul>
           </div>
@@ -203,14 +165,14 @@ class Linkage extends React.Component {
             <button type="button" className="btn btn-danger" data-toggle="dropdown">
               {this.state.companylistChoose === '' ? '全部' : this.state.companylistChoose}
             </button>
-            <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button type="button" className="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"  style={{ backgroundColor: '#f3f3f3' }}>
               <span className="caret"></span>
               <span className="sr-only">Toggle Dropdown</span>
             </button>
             <ul className="dropdown-menu">
               <input style={{width:'100%'}} onKeyUp={this.searchCompanyList.bind(this)} placeholder="输入关键字查询" />
               {
-                  companylist.map((item) => {
+                  companylist ? companylist.map((item) => {
                     return (
                       item.display
                       ?
@@ -221,6 +183,7 @@ class Linkage extends React.Component {
                       </li>
                     )
                   })
+                  : ''
                 }
             </ul>
           </div>

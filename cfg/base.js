@@ -28,7 +28,8 @@ module.exports = {
     noInfo: false,
     proxy: {
       "/csc-administration": "http://test.changhong.com"
-    }
+    },
+    open: true
   },
   resolve: {
     extensions: ['', '.js', '.jsx'],

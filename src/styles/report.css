@@ -659,6 +659,7 @@ tbody tr:nth-child(2n+1) {
 .p-n,
 .searchblock {
   margin-right: 5px;
+  background: #f3f3f3;
 }
 .searchblock {
   float: left;
@@ -805,4 +806,52 @@ tbody tr:nth-child(2n+1) {
 }
 #kuaijipingzheng .bs-checkbox {
   border-right: solid 1px #d8d8d8!important;
+}
+.tab-pane,
+.clearfix {
+  background-color: #f3f3f3;
+}
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(720deg);
+  }
+}
+@-webkit-keyframes rotate {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  50% {
+    -webkit-transform: rotate(360deg);
+  }
+  100% {
+    -webkit-transform: rotate(720deg);
+  }
+}
+@-moz-keyframes rotate {
+  0% {
+    -moz-transform: rotate(0deg);
+  }
+  50% {
+    -moz-transform: rotate(360deg);
+  }
+  100% {
+    -moz-transform: rotate(720deg);
+  }
+}
+@-ms-keyframes rotate {
+  0% {
+    -ms-transform: rotate(0deg);
+  }
+  50% {
+    -ms-transform: rotate(360deg);
+  }
+  100% {
+    -ms-transform: rotate(720deg);
+  }
 }

@@ -1,7 +1,7 @@
 // import axios from 'axios';
 import $ from 'jquery';
 
-var TOKEN = '033dac425572d4984daaf1059099b679';
+var TOKEN = '2f0376c05dc8dc0c4cafb7630e8c97a9';
 
 const alert = function (title,msg) { // 提示框;
   if ($('#dialog_bg')) {
