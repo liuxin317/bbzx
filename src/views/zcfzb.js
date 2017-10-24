@@ -1,7 +1,7 @@
 import React from 'react';
 import $ from 'jquery';
 import { $http, prompt } from '../common/http.js';
-import ToDoLinkAge from '../containers/connect.js';
+import ToDoLinkAge from '../containers/connectLinkAge.js';
 import Store from '../stores/store.js';
 require('../styles/datepicker/bootstrap-datetimepicker.js');
 

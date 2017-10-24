@@ -6,8 +6,8 @@ require('styles/views.css');
 require('styles/report.css');
 
 import React, { Component } from 'react';
-import BalanceSheet from './components/zcfzb.js';
-import Load from './components/loading.js';
+import Zcfzb from './views/zcfzb.js';
+import Load from './common/loading.js';
 
 class App extends Component {
   constructor (props) {
@@ -17,8 +17,8 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Load state={false} />
-        <BalanceSheet />
+        <Load state={this.props.store.maskStatus} />
+        <Zcfzb />
       </div>
     )
   }

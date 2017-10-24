@@ -1,5 +1,7 @@
 import React from 'react';
-import { $http } from './http.js';
+import { $http } from '../common/http.js';
+import Store from '../stores/store.js';
+import types from '../actionTypes/types.js';
 require('../styles/bootstrap/js/bootstrap.min.js');
 
 class Linkage extends React.Component {
@@ -42,12 +44,13 @@ class Linkage extends React.Component {
   selTenant (item) { // 租户选择;
     this.props.clearData(); // 清空公司数据;
 
-
     this.setState({
       tenantId: item.tenantId,
       soltsukolistChoose: item.tenantName,
       companylistChoose: ''
     }, () => {
+      Store.dispatch({ type: types.maskStatus, payload: true });
+
       this.props.getCompanylist({
         addr: 'getTenantCoPageData2',
         keyword: '',

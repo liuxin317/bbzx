@@ -23,6 +23,9 @@ export default (state = {}, action) => {
     case types.companyList:
       var obj = { companyList: action.payload }
       return Object.assign({}, state, obj);
+    case types.maskStatus:
+      var obj = { maskStatus: action.payload }
+      return Object.assign({}, state, obj);
     default:
       return state
   }

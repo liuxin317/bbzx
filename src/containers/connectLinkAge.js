@@ -1,5 +1,5 @@
 import {connect} from 'react-redux';
-import LinkAge from '../common/linkage.js';
+import LinkAge from '../components/linkage.js';
 import FetchPosts from '../actions/Actions.js';
 import types from '../actionTypes/types.js';
 
