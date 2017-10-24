@@ -6,8 +6,8 @@ import types from '../actionTypes/types.js';
 const mapStateToProps = (state) => {
   return {
     'tenant': () => {
-      if (state.resetdroplist) {
-        let data = JSON.parse(JSON.stringify(state.resetdroplist));
+      if (state.rootReducers.resetdroplist) {
+        let data = JSON.parse(JSON.stringify(state.rootReducers.resetdroplist));
         let init = [{ // 租户列表;
                       'key': 0,
                       'bussLicenseNo': null,
@@ -26,8 +26,8 @@ const mapStateToProps = (state) => {
       }
     },
     'company': () => {
-      if (state.companyList) {
-        let data = JSON.parse(JSON.stringify(state.companyList));
+      if (state.rootReducers.companyList) {
+        let data = JSON.parse(JSON.stringify(state.rootReducers.companyList));
         let init = [{ // 公司列表;
                       'key': 0,
                       'companyCode': undefined,

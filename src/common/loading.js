@@ -3,7 +3,7 @@ import React from 'react';
 export default class Load extends React.Component {
   render () {
     var active = {
-      display: this.props.state ? 'block' : 'none'
+      display: this.props.state.maskStatus ? 'block' : 'none'
     }
 
     return (
