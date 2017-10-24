@@ -6,8 +6,17 @@ require('styles/views.css');
 require('styles/report.css');
 
 import React, { Component } from 'react';
+// 组件相关
 import Zcfzb from './views/zcfzb.js';
 import Load from './common/loading.js';
+
+// 路由相关
+import createHistory from 'history/createBrowserHistory';
+import { Route } from 'react-router';
+import { ConnectedRouter, push } from 'react-router-redux';
+
+
+const history = creacteHistory();
 
 class App extends Component {
   constructor (props) {
@@ -16,10 +25,13 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <Load state={this.props.store.maskStatus} />
-        <Zcfzb />
-      </div>
+      <ConnectedRouter>
+        <div>
+          <Load state={false} />
+          <Route exact path="/" component={Zcfzb}></Route>
+          <Route path="/Page"></Route>
+        </div>
+      </ConnectedRouter>
     )
   }
 }
