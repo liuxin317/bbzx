@@ -6,17 +6,20 @@ require('styles/views.css');
 require('styles/report.css');
 
 import React, { Component } from 'react';
-// 组件相关
-import Zcfzb from './views/zcfzb.js';
-import Load from './common/loading.js';
 
 // 路由相关
 import createHistory from 'history/createBrowserHistory';
 import { Route } from 'react-router';
 import { ConnectedRouter, push } from 'react-router-redux';
 
+// 组件相关
+import Load from './common/loading';
+import Zcfzb from './views/Zcfzb';
+import Kmyeb from './views/Kmyeb';
 
-const history = creacteHistory();
+
+
+const history = createHistory();
 
 class App extends Component {
   constructor (props) {
@@ -24,12 +27,13 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
-      <ConnectedRouter>
+      <ConnectedRouter history={history}>
         <div>
           <Load state={false} />
-          <Route exact path="/" component={Zcfzb}></Route>
-          <Route path="/Page"></Route>
+          <Route exact path="/zcfzb" component={Zcfzb}></Route>
+          <Route path="/kmyeb" component={Kmyeb}></Route>
         </div>
       </ConnectedRouter>
     )
