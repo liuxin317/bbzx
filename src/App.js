@@ -6,8 +6,16 @@ require('styles/views.css');
 require('styles/report.css');
 
 import React, { Component } from 'react';
+// 路由相关
+import createHistory from 'history/createBrowserHistory';
+import { Route } from 'react-router';
+import { ConnectedRouter, push } from 'react-router-redux';
+
+// 组件相关
 import BalanceSheet from './components/zcfzb.js';
 import Load from './components/loading.js';
+
+const history = creacteHistory();
 
 class App extends Component {
   constructor (props) {
@@ -16,10 +24,13 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <Load state={false} />
-        <BalanceSheet />
-      </div>
+      <ConnectedRouter>
+        <div>
+          <Load state={false} />
+          <Route exact path="/" component={BalanceSheet}></Route>
+          <Route path="/Page"></Route>
+        </div>
+      </ConnectedRouter>
     )
   }
 }

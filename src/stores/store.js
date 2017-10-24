@@ -3,6 +3,17 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import rootReducers from '../reducers/rootReducers.js';
 
-const store = createStore(rootReducers, applyMiddleware(thunk));
+// 路由相关
+const history = creacteHistory();
+const middleware = routerMiddleware(history);
+import { routerReducer, routerMiddleware } from 'react-router-redux';
+
+const history = creacteHistory();
+const router = routerMiddleware(history);
+
+const store = createStore(combineReducers({
+  routerReducer,
+  rootReducers
+}), applyMiddleware(thunk, router));
 
 export default store;
