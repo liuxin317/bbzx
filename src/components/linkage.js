@@ -84,15 +84,17 @@ class Linkage extends React.Component {
   selCompany (item) { // 公司选择;
     var testNum = 0;
 
-    this.state.soltsukolist.forEach((d) => {
-      if (item.tenantId === d.tenantId) {
-        this.setState({
-          soltsukolistChoose: d.tenantName,
-          companylistChoose: item.companyName
-        })
-        testNum++
-      }
-    })
+    if (this.state.soltsukolist) {
+      this.state.soltsukolist.forEach((d) => {
+        if (item.tenantId === d.tenantId) {
+          this.setState({
+            soltsukolistChoose: d.tenantName,
+            companylistChoose: item.companyName
+          })
+          testNum++
+        }
+      })
+    }
 
     if (testNum === 0) {
       this.setState({

@@ -1,9 +1,9 @@
 // import axios from 'axios';
 import $ from 'jquery';
 
-var TOKEN = '9ec359fec7f3f9044ca0665c10208ce7';
+var TOKEN = 'e6c6fcfa74be017a4d01a991a2a99ecc';
 
-const alert = function (title,msg) { // 提示框;
+const alert = function (title, msg) { // 提示框;
   if ($('#dialog_bg')) {
     $('#dialog_bg, #dialog_content').remove();
   }
@@ -20,8 +20,19 @@ const alert = function (title,msg) { // 提示框;
   })
 }
 
+const showText = function(text) {
+  var $text = $('<div class="showtext" style="display: none;">' + text + '</div>');
+  $('body').append($text);
+  $('.showtext').fadeIn(200, function () {
+    setTimeout(function() {
+      $(this).fadeOut(50);
+    }.bind(this), 1500)
+  })
+};
+
 const http = (method, data = {}, callback = null, error = null) => {
   data.token = TOKEN;
+  data.data = new Date();
 
   $.ajax({
     type: method,
@@ -90,3 +101,4 @@ http.get = (url) => {
 
 export let $http = http;
 export let prompt = alert;
+export let promptShowText = showText;
