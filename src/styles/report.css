@@ -2,6 +2,10 @@
     width: 150px;
 }
 
+.w150.w130 {
+    width: 130px;
+}
+
 .h25 {
     height: 25px;
 }
@@ -618,7 +622,7 @@ tbody tr:nth-child(2n+1) {
 }
 
 .v-middle .dropdown-menu li {
-  padding: 5px 0;
+  padding: 5px;
 }
 .v-middle .dropdown-menu li:hover {
   cursor: default;
@@ -650,9 +654,6 @@ tbody tr:nth-child(2n+1) {
   vertical-align: middle;
   background-color: white;
 }
-#xmmx thead > tr > th:nth-child(2) {
-  width: 40px !important;
-}
 /*#xmmx .dropdown-menu {
     width: 450px;
 }*/
@@ -672,10 +673,7 @@ tbody tr:nth-child(2n+1) {
   border-left: 4px solid transparent;
 }
 .table thead > tr > th:first-of-type {
-  width: 55px !important;
-}
-#xmmx .table thead > tr > th:first-of-type {
-  width: 20px !important;
+  /*width: 55px !important;*/
 }
 .btn-primary:hover {
   background-color: #2682e0 !important;
@@ -817,6 +815,15 @@ tbody tr:nth-child(2n+1) {
 .clearfix {
   background-color: #f3f3f3;
 }
+.link-age-style .mydroplist {
+  width: 160px !important;
+}
+#jumpNum {
+  width: 44px;
+}
+.fixed-table-body {
+  overflow: hidden;
+}
 @keyframes rotate {
   0% {
     transform: rotate(0deg);
@@ -860,4 +867,17 @@ tbody tr:nth-child(2n+1) {
   100% {
     -ms-transform: rotate(720deg);
   }
+}
+
+.tooltip-arrow {
+  border-top-color: #69b3ff !important;
+  border-bottom-color: #69b3ff !important;
+  left: 50%;
+}
+
+.tooltip-inner {
+  max-height: 768px;
+  font-size: 15px;
+  color: #ffffff;
+  background-color: #69b3ff;
 }

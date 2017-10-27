@@ -6,7 +6,7 @@ import { $http, prompt, promptShowText } from '../common/http';
 import ToDoLinkAge from '../containers/connectLinkAge';
 import LeftSwitch from '../components/tableGroup/leftSwitch';
 import RightTable from '../components/tableGroup/rightTable';
-import ZcfzTableContent from '../components/tableGroup/zcfzTableContent';
+import XjllbTableContent from '../components/tableGroup/xjllbTableContent';
 require('../styles/datepicker/bootstrap-datetimepicker');
 
 //单个日期控件 控件id，日期格式，起始模式年/月/日
@@ -64,7 +64,7 @@ class BalanceSheet extends React.Component {
         addr: 'getMasTabRptList',
         compCode: this.state.chooseCompanyData.companyCode,
         year: $('#setYear1').val(),
-        type: 1
+        type: 3
       }, (data) => {
         if (!data.list.length) {
           prompt('提示', '无数据');
@@ -87,8 +87,9 @@ class BalanceSheet extends React.Component {
     Store.dispatch({ type: types.maskStatus, payload: true });
 
     $http('POST', {
-      addr: 'getBalanceData',
-      code: code
+      addr: 'getIncomeData',
+      code: code,
+      type: 3
     }, response => {
       Store.dispatch({ type: types.maskStatus, payload: false });
 
@@ -108,30 +109,30 @@ class BalanceSheet extends React.Component {
         compCode: this.state.chooseCompanyData.companyCode,
         year: $('#setYear1').val(),
         month: $('#month1').val(),
-        type: 1
+        type: 3
       }, (data) => {
         promptShowText(data.rspDesc);
       });
     }
   }
 
-  downLoad () {
+  downLoad () { // 下载;
     Store.dispatch({ type: types.maskStatus, payload: true });
 
     $http('POST', {
       addr: 'downloadMasterTable',
       code: this.state.code,    //"YJ00-201605"
-      type: 1
+      type: 3
     }, (data) => {
       Store.dispatch({ type: types.maskStatus, payload: false });
 
       setTimeout(() => {
-        window.open(encodeURI(this.state.host + data.data.url + '?constomFilename=资产负债表&deleteFileFlag=1'))
+        window.open(encodeURI(this.state.host + data.data.url + '?constomFilename=现金流量表&deleteFileFlag=1'))
       }, 500)
     });
   }
 
-  upSetYear () {
+  upSetYear () { // 监听年份;
     this.setState({
       setYear: $('#setYear1').val()
     })
@@ -175,7 +176,7 @@ class BalanceSheet extends React.Component {
           <div className="m-t-md m-b-lg" style={{ minHeight: "505px", border: "1px solid #c3c3c3" }}>
             <LeftSwitch switchData={ this.state.switchData } switchTable={ this.getTableData.bind(this) } />
             <RightTable tableData={ this.state.tableData }>
-              <ZcfzTableContent tableListData={ this.state.tableData }/>
+              <XjllbTableContent tableListData={ this.state.tableData } />
             </RightTable>
           </div>
         </div>

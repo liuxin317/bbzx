@@ -1,8 +1,9 @@
 import React from 'react';
+import $ from 'jquery';
 import { $http } from '../common/http.js';
 import Store from '../stores/store.js';
 import types from '../actionTypes/types.js';
-require('../styles/bootstrap/js/bootstrap.min.js');
+require('../styles/bootstrap/js/bootstrap.min');
 
 class Linkage extends React.Component {
   constructor (props) {
@@ -27,6 +28,10 @@ class Linkage extends React.Component {
       pageSize: 20000000,
       pageNumber: 1
     })
+
+    setTimeout(() => {
+      $("[data-toggle='tooltip']").tooltip();
+    }, 1000)
   }
 
   componentWillReceiveProps () {
@@ -133,7 +138,7 @@ class Linkage extends React.Component {
     var companylist = this.state.companylist;
 
     return (
-      <div className="pull-left">
+      <div className={"pull-left " + this.props.style}>
         <div className="searchblock">
           <span>租户：</span>
           <div style={{ marginRight: '0px', width: '200px' }} className="mydroplist btn-group">
@@ -154,7 +159,7 @@ class Linkage extends React.Component {
                       ''
                       :
                       <li key={item.key} onClick={this.selTenant.bind(this,item)}>
-                          <a key={item.key} href="#" className="data-toggle-tooltip" data-toggle="tooltip"  title={item.tenantName}>{item.tenantName}</a>
+                          <a key={item.key} href="javascript: " className="data-toggle-tooltip" data-toggle="tooltip"  title={item.tenantName}>{item.tenantName}</a>
                       </li>
                     )
                   })
@@ -184,7 +189,7 @@ class Linkage extends React.Component {
                       ''
                       :
                       <li key={item.key} onClick={this.selCompany.bind(this, item)}>
-                          <a key={item.key} href="#" className="data-toggle-tooltip" data-toggle="tooltip"  title={item.companyName}>{item.companyName}</a>
+                          <a key={item.key} href="javascript: " className="data-toggle-tooltip" data-toggle="tooltip"  title={item.companyName}>{item.companyName}</a>
                       </li>
                     )
                   })

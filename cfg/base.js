@@ -27,7 +27,8 @@ module.exports = {
     publicPath: defaultSettings.publicPath,
     noInfo: false,
     proxy: {
-      "/csc-administration": "http://test.changhong.com"
+      "/csc-administration": "http://test.changhong.com",
+      "/reportSapSource": "http://test.changhong.com"
     },
     open: true
   },

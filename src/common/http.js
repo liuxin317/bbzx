@@ -1,7 +1,9 @@
 // import axios from 'axios';
 import $ from 'jquery';
+import Store from '../stores/store';
+import types from '../actionTypes/types';
 
-var TOKEN = 'e6c6fcfa74be017a4d01a991a2a99ecc';
+var TOKEN = '3a56b7d9dfe0b2b94b6acceb5e0eb482';
 
 const alert = function (title, msg) { // 提示框;
   if ($('#dialog_bg')) {
@@ -40,11 +42,12 @@ const http = (method, data = {}, callback = null, error = null) => {
     dataType: 'json',
     data: data,
     success:function(msg){
+      Store.dispatch({ type: types.maskStatus, payload: false })
       if (msg !== null && msg !== undefined) {
         if (msg.rspCode == '000000') {
             callback(msg)
         } else if (msg.rspCode == '100003') {
-          // parent.location.reload();
+          parent.location.reload();
         } else {
             alert('提示',msg.rspDesc);
             if (error !== null) {
@@ -53,6 +56,7 @@ const http = (method, data = {}, callback = null, error = null) => {
         }
       }else {
         alert('请求失败');
+        Store.dispatch({ type: types.maskStatus, payload: false });
         if (error !== null) {
           error()
         }
@@ -60,6 +64,7 @@ const http = (method, data = {}, callback = null, error = null) => {
     },
     error:function(){
       alert('提示','喔唷，崩溃啦！');
+      Store.dispatch({ type: types.maskStatus, payload: false });
       if (error !== null) {
         error()
       }
@@ -94,3 +99,4 @@ const http = (method, data = {}, callback = null, error = null) => {
 export let $http = http;
 export let prompt = alert;
 export let promptShowText = showText;
+export let getToken = TOKEN;

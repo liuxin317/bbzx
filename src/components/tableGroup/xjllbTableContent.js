@@ -26,29 +26,20 @@ class TableContent extends React.Component {
           <thead>
             <tr>
               <th>项目</th>
-              <th>期末余额</th>
-              <th>年初余额</th>
-              <th>项目</th>
-              <th>期末余额</th>
-              <th>年初余额</th>
+              <th>本期累计数</th>
+              <th>本年累计数</th>
+              <th>上年同期累计数</th>
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td colSpan="3">资产</td>
-                <td colSpan="3">负债及权益</td>
-            </tr>
-
             {
               tableListData ? tableListData.data.map((item,index) => {
                 return (
                   <tr key={index}>
-                    <td title={item.name1} className="w264 max-w264">{item.name1}</td>
-                    <td className="w112_right">{this.formatterMoney(item.endBalance1)}</td>
-                    <td className="w112_right">{this.formatterMoney(item.beginBalance1)}</td>
-                    <td title={item.name2} className="w264 max-w264">{item.name2}</td>
-                    <td className="w112_right">{this.formatterMoney(item.endBalance2)}</td>
-                    <td className="w112_right">{this.formatterMoney(item.beginBalance2)}</td>
+                    <td title={item.name} className="w264 max-w264">{item.name}</td>
+                    <td className="w112_right">{this.formatterMoney(item.currentPeriod)}</td>
+                    <td className="w112_right">{this.formatterMoney(item.currentYear)}</td>
+                    <td className="w112_right">{this.formatterMoney(item.lastCurrentPeriod)}</td>
                   </tr>
                 )
               })

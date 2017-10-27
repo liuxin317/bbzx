@@ -10,7 +10,7 @@ class RightTable extends React.Component {
           tableData ?
           <div className="min-h571" style={{ backgroundColor: '#c3c3c3' }}>
               <h1 className="p-v-md text-center m-n-t">{ tableData.reportInfo.name }</h1>
-              <div className="p-list flex b-b-weight">
+              <div className="p-list flex b-b-weight" style={{ height: '32px' }}>
                   <div className="fs14 font-weight p-l-xxxs w-42 pull-left">
                       单位：{ tableData.reportInfo.compName }
                   </div>
