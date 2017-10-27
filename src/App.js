@@ -14,7 +14,9 @@ import { ConnectedRouter, push } from 'react-router-redux';
 
 // 组件相关
 import Load from './common/loading';
-import Zcfzb from './views/Zcfzb';
+import Zcfzb from './views/Zcfzb'; // 资产负债表
+import Kmyeb from './views/Kmyeb'; // 科目余额表
+import Zzmxb from './views/Zzmxb'; // 总账明细表
 
 const history = createHistory();
 
@@ -29,6 +31,8 @@ class App extends Component {
         <div>
           <Load state={this.props.store.rootReducers} />
           <Route exact path="/zcfzb" component={Zcfzb}></Route>
+          <Route exact path="/kmyeb" component={Kmyeb}></Route>
+          <Route exact path="/zzmxb" component={Zzmxb}></Route>
         </div>
       </ConnectedRouter>
     )

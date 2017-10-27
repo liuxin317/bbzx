@@ -1,7 +1,7 @@
 // import axios from 'axios';
 import $ from 'jquery';
 
-var TOKEN = 'a0d8e7f79f0337e54312cea8d36c87fd';
+var TOKEN = '9ec359fec7f3f9044ca0665c10208ce7';
 
 const alert = function (title,msg) { // 提示框;
   if ($('#dialog_bg')) {
@@ -79,6 +79,14 @@ const http = (method, data = {}, callback = null, error = null) => {
   //   error && error()
   // });
 };
+
+http.get = (url) => {
+  return new Promise((resolve, reject) => {
+    $.getJSON(`/csc-administration${url}`, response => {
+      resolve(response)
+    })
+  });
+}
 
 export let $http = http;
 export let prompt = alert;
