@@ -19,7 +19,8 @@ import Lrb from './views/Lrb';
 import Xjllb from './views/Xjllb';
 import Kmyeb from './views/Kmyeb';
 import Xmmxb from './views/Xmmxb';
-import Pzzx from './views/Pzzx'
+import Pzzx from './views/Pzzx';
+import Zzmxb from './views/Zzmxb'; // 总账明细表
 
 const history = createHistory();
 
@@ -38,6 +39,7 @@ class App extends Component {
           <Route path="/xjllb" component={Xjllb} />
           <Route path="/kmyeb" component={Kmyeb} />
           <Route path="/xmmxb" component={Xmmxb} />
+          <Route path="/zzmxb" component={Zzmxb} />
           <Route exact path="/pzzx" component={Pzzx} />
         </div>
       </ConnectedRouter>

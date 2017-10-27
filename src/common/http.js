@@ -96,6 +96,14 @@ const http = (method, data = {}, callback = null, error = null) => {
   // });
 };
 
+http.get = (url) => {
+  return new Promise((resolve, reject) => {
+    $.getJSON(`/csc-administration${url}`, response => {
+      resolve(response)
+    })
+  });
+}
+
 export let $http = http;
 export let prompt = alert;
 export let promptShowText = showText;

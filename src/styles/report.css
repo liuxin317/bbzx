@@ -869,6 +869,7 @@ tbody tr:nth-child(2n+1) {
   }
 }
 
+<<<<<<< HEAD
 .tooltip-arrow {
   border-top-color: #69b3ff !important;
   border-bottom-color: #69b3ff !important;
@@ -880,4 +881,40 @@ tbody tr:nth-child(2n+1) {
   font-size: 15px;
   color: #ffffff;
   background-color: #69b3ff;
+=======
+/* 总账明细表 */
+.search-bar, .page-body {
+    float: left;
+    width: 100%;
+}
+.search-bar-item {
+    float: left;
+    height: 33px;
+    margin-right: 5px;
+}
+.search-bar-item__label {
+    display: inline-block;
+    line-height: 33px;
+}
+.search-bar-item__select {
+    height: 33px;
+    width: 130px;
+    padding: 0 12px;
+    box-sizing: border-box;
+    border: 1px solid #d8d8d8;
+    color: #838383;
+}
+.search-bar-item__button, .search-bar-item__button:hover, .search-bar-item__button:focus {
+    background-color: #3996f5;
+    color: #FFF;
+    outline: none;
+}
+
+/* react-bootstrap-table样式补丁 */
+.react-bs-container-body td {
+    vertical-align: middle !important;
+}
+.react-bootstrap-table-page-btns-ul {
+    margin: 0 !important;
+>>>>>>> f54c7824a955cfe4b166fa52a469a5db6c6acad5
 }

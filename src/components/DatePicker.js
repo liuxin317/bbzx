@@ -41,7 +41,7 @@ export const SingleTimePicker = class SingleTimePicker extends Component {
     });
     $(id).datetimepicker('update', (new Date()));
   }
-
+  
   componentDidMount () {
     this.singleTimePicker("#setYear4", "yyyy", 4);
   }
