@@ -9,8 +9,9 @@ import React, { Component } from 'react';
 
 // 路由相关
 import createHistory from 'history/createBrowserHistory';
-import { Route } from 'react-router';
-import { ConnectedRouter, push } from 'react-router-redux';
+// import { Route } from 'react-router';
+// import { ConnectedRouter, push } from 'react-router-redux';
+import {HashRouter as Router, Route, Link} from 'react-router-dom'
 
 // 组件相关
 import Load from './common/Loading';
@@ -31,7 +32,7 @@ class App extends Component {
 
   render() {
     return (
-      <ConnectedRouter history={history}>
+      <Router history={history}>
         <div>
           <Load state={this.props.store.rootReducers} />
           <Route exact path="/" component={Pzzx} />
@@ -43,7 +44,7 @@ class App extends Component {
           <Route path="/zzmxb" component={Zzmxb} />
           <Route path="/pzzx" component={Pzzx} />
         </div>
-      </ConnectedRouter>
+      </Router>
     )
   }
 }
