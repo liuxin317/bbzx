@@ -34,13 +34,14 @@ class App extends Component {
       <ConnectedRouter history={history}>
         <div>
           <Load state={this.props.store.rootReducers} />
+          <Route exact path="/" component={Pzzx} />
           <Route path="/zcfzb" component={Zcfzb} />
           <Route path="/lrb" component={Lrb} />
           <Route path="/xjllb" component={Xjllb} />
           <Route path="/kmyeb" component={Kmyeb} />
           <Route path="/xmmxb" component={Xmmxb} />
           <Route path="/zzmxb" component={Zzmxb} />
-          <Route exact path="/pzzx" component={Pzzx} />
+          <Route path="/pzzx" component={Pzzx} />
         </div>
       </ConnectedRouter>
     )

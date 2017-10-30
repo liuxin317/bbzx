@@ -3,7 +3,26 @@ import $ from 'jquery';
 import Store from '../stores/store';
 import types from '../actionTypes/types';
 
-var TOKEN = '3a56b7d9dfe0b2b94b6acceb5e0eb482';
+function getCookie(name)
+{
+  var arr=document.cookie.split('; ');
+  var i=0;
+  for(i=0;i<arr.length;i++)
+  {
+      //arr2->['username', 'abc']
+      var arr2=arr[i].split('=');
+
+      if(arr2[0]==name)
+      {
+          var getC = decodeURIComponent(arr2[1]);
+          return getC;
+      }
+  }
+
+  return '';
+}
+
+var TOKEN = getCookie('admin_t');
 
 const alert = function (title, msg) { // 提示框;
   if ($('#dialog_bg')) {
@@ -33,7 +52,7 @@ const showText = function(text) {
 };
 
 const http = (method, data = {}, callback = null, error = null) => {
-  data.token = TOKEN;
+  data.token = '55e23f44c829bb4a4042f18e7635a415';
   data.data = new Date();
 
   $.ajax({

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
+import $ from 'jquery';
 import ToDoLinkAge from '../containers/connectLinkAge';
 import { DoubleTimePicker, SingleTimePicker } from '../components/DatePicker';
-
 import { $http, prompt } from '../common/http.js';
-
 import Modal from './../components/ModalZzmxb';
 
 export default class Kmyeb extends Component {
@@ -24,14 +23,13 @@ export default class Kmyeb extends Component {
 
   // 获取选中公司数据;
   getChooseCompany = data => {
-    console.log(data)
     this.setState({
       chooseCompanyData: data
     })
   }
 
   // 清空数据;
-  clearData = () => { 
+  clearData = () => {
     this.setState({
       chooseCompanyData: ''
     })
@@ -47,6 +45,7 @@ export default class Kmyeb extends Component {
     let startTime = document.getElementById('startTime').value.replace(/-/g, '');
     let endTime = document.getElementById('endTime').value.replace(/-/g, '');
     let type = this.state.type;
+    this.refs.model.clearData();
 
     this.setState({ startTime, endTime }, () => {
       if (this.state.chooseCompanyData) {
@@ -71,11 +70,11 @@ export default class Kmyeb extends Component {
   // 获取弹窗数据
   getModalData = params => {
     let iframeSrc = '';
-    
+
     if (params.selectedStr) {
       iframeSrc = `${this.state.iframeHost}/sap/bc/webdynpro/sap/zfiglwda0002?TYPE=${this.state.type}${params.selectedStr}&BUKRS=${this.state.chooseCompanyData.companyCode}&HKONT=${params.subjectCodeStr}DATE=${this.state.startTime}${this.state.endTime}&sap-language=ZH`
     }
-    
+
     this.setState({ iframeSrc });
   }
 
@@ -97,9 +96,9 @@ export default class Kmyeb extends Component {
       <div className="page">
         <div className="search-bar">
           <div className="search-bar-item">
-            <ToDoLinkAge 
-              chooseCompany={ this.getChooseCompany } 
-              clearData={ this.clearData } 
+            <ToDoLinkAge
+              chooseCompany={ this.getChooseCompany }
+              clearData={ this.clearData }
             />
           </div>
           <div className="search-bar-item">
@@ -126,25 +125,26 @@ export default class Kmyeb extends Component {
               会计科目
             </button>
           </div>
+          <div className="clear"></div>
         </div>
-        <div className="page-body">
-          {
-            this.state.iframeSrc
-            ? (
-                <iframe style={{width:'100%', height: '630px'}}
-                  frameBorder="0" 
-                  name="content_iframe"
-                  scrolling="auto" 
-                  allowTransparency="true"
-                  src={this.state.iframeSrc}
-                >
-                </iframe>
-              )
-            : ''
-          }
+        <div className="m-t-md m-b-lg" id="xmmxTable" style={{ height: '500px', border: '1px solid #c3c3c3', overflow: 'hidden' }}>
+            {
+              this.state.iframeSrc
+              ? (
+                  <iframe style={{width:'100%', height: '100%'}}
+                    frameBorder="0"
+                    name="content_iframe"
+                    scrolling="auto"
+                    allowTransparency="true"
+                    src={this.state.iframeSrc}
+                  >
+                  </iframe>
+                )
+              : ''
+            }
         </div>
 
-        <Modal subjectList={this.state.subjectList} 
+        <Modal ref="model" subjectList={this.state.subjectList}
           onModalData={this.getModalData}
         />
       </div>

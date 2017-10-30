@@ -631,6 +631,9 @@ tbody tr:nth-child(2n+1) {
 #kjpzRpt .th-inner {
   background-color: white;
 }
+.bootstrap-table thead {
+  background-color: white;
+}
 .bootstrap-table tbody, .bootstrap-table thead {
   border: 1px solid #ddd;
 }
@@ -706,7 +709,7 @@ tbody tr:nth-child(2n+1) {
   margin-left: 10px !important;
 }
 .fixed-table-pagination {
-  padding: 10px;
+  padding: 10px 10px 10px 0;
 }
 /*分页 - start*/
 .pull-left.pagination-detail,
@@ -742,9 +745,9 @@ tbody tr:nth-child(2n+1) {
   -o-opacity: 1;
   -ms-opacity: 1;
 }
-.fixed-table-pagination div.pull-left {
+/*.fixed-table-pagination div.pull-left {
   margin-left: 15%;
-}
+}*/
 /*.fixed-table-pagination .pull-right,
 .fixed-table-pagination div.pull-left, {
     height: 37px;
@@ -794,7 +797,7 @@ tbody tr:nth-child(2n+1) {
 #mc_box .pull-left.pagination {
   margin-top: 13px;
 }
-#kuaijipingzheng .pagination>li,
+.pagination>li,
 #cb_box .pagination>li,
 #mc_box .pagination>li {
   float: left;
@@ -869,7 +872,6 @@ tbody tr:nth-child(2n+1) {
   }
 }
 
-<<<<<<< HEAD
 .tooltip-arrow {
   border-top-color: #69b3ff !important;
   border-bottom-color: #69b3ff !important;
@@ -881,10 +883,11 @@ tbody tr:nth-child(2n+1) {
   font-size: 15px;
   color: #ffffff;
   background-color: #69b3ff;
-=======
+}
+
 /* 总账明细表 */
 .search-bar, .page-body {
-    float: left;
+    /*float: left;*/
     width: 100%;
 }
 .search-bar-item {
@@ -916,5 +919,16 @@ tbody tr:nth-child(2n+1) {
 }
 .react-bootstrap-table-page-btns-ul {
     margin: 0 !important;
->>>>>>> f54c7824a955cfe4b166fa52a469a5db6c6acad5
+}
+.search-bar-item .dropdown-menu li {
+    padding: 5px 0;
+}
+.react-bs-table-bordered {
+    border: none;
+}
+.modal-md .text-right button {
+    margin-left: 5px;
+}
+.fixed-table-pagination .jump-wrap {
+  margin-left: 0;
 }

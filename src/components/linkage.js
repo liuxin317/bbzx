@@ -109,7 +109,12 @@ class Linkage extends React.Component {
     }
 
     if (this.props.chooseCompany) { // 向外抛出公司数据;
-      this.props.chooseCompany(item);
+      if (item.companyName === '全部') {
+        this.props.chooseCompany('');
+      } else {
+        this.props.chooseCompany(item);
+      }
+      
     }
   }
 

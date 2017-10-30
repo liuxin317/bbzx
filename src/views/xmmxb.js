@@ -31,6 +31,8 @@ class BalanceSheet extends React.Component {
 
   getChooseCompany (data) { // 获取选中公司数据;
     this.setState({
+      xmData: '',
+      cbData: '',
       chooseCompanyData: data
     })
   }
@@ -414,7 +416,7 @@ class BalanceSheet extends React.Component {
 
           <div className="m-t-md m-b-lg" id="xmmxTable" style={{ height: '630px', border: '1px solid #c3c3c3' }}>
             {/* iframe嵌入SAP网页 */}
-        </div>
+          </div>
         </div>
       </section>
     )
