@@ -52,7 +52,7 @@ const showText = function(text) {
 };
 
 const http = (method, data = {}, callback = null, error = null) => {
-  data.token = '55e23f44c829bb4a4042f18e7635a415';
+  data.token = TOKEN;
   data.data = new Date();
 
   $.ajax({

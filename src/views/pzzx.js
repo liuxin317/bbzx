@@ -4,6 +4,7 @@ import Store from '../stores/store';
 import types from '../actionTypes/types';
 import { $http, prompt, promptShowText, getToken } from '../common/http';
 import ToDoLinkAge from '../containers/connectLinkAge';
+import AccountingVoucher from '../components/AccountVoucher';
 import { DoubleTimePicker } from '../components/DatePicker';
 require('../styles/table-group');
 
@@ -14,7 +15,8 @@ class BalanceSheet extends React.Component {
       chooseCompanyData: '', // 选中公司的数据;
       host: window.location.protocol+'//'+window.location.host+'/csc-administration/download/', // 下载域名路径
       dataType: 0, //查询类型;
-      dataTypeName: '记账日期' //类型名称;
+      dataTypeName: '记账日期', //类型名称;
+      accountData: '' // 凭证号弹窗;
     }
   }
 
@@ -76,6 +78,10 @@ class BalanceSheet extends React.Component {
           searchAlign: "left",//查询框对齐方式
           queryParamsType: "limit",//查询参数组织方式
           responseHandler: function (res) {
+            setTimeout(() => {
+              self.kjpzAlert()
+            }, 1000)
+
             return res.data
           },
           queryParams: function getParams(params) {
@@ -133,7 +139,7 @@ class BalanceSheet extends React.Component {
                 width: 30,//宽度
                 formatter: function (value, row, index) {
                   if (row) {
-                      return '<a href="kjfwdd.html?orderCode=' + row.orderCode + '&orderId='+ row.orderId  +'" target="_blank">' + value + '</a>';
+                      return '<a href="/csc-administration/views/kjfwdd.html?orderCode=' + row.orderCode + '&orderId='+ row.orderId  +'" target="_blank">' + value + '</a>';
                   } else {
                       return '-';
                   }
@@ -148,7 +154,7 @@ class BalanceSheet extends React.Component {
                 sortable: true,
                 formatter: function (value, row, index) {
                   if (row) {
-                      return '<a style="cursor: pointer" class="khpzh" onclick="kjpzAlert(this)" order="' + row.orderCode + '" voucher="' + row.voucherCode + '">' + value + '</a>';
+                      return '<a style="cursor: pointer" class="khpzh" order="' + row.orderCode + '" voucher="' + row.voucherCode + '">' + value + '</a>';
                   } else {
                       return '-';
                   }
@@ -184,7 +190,7 @@ class BalanceSheet extends React.Component {
                 formatter: function (value, row, index) {
                   if (row) {
                       if (value != null && value != '') {
-                          return '<a style="cursor: pointer" class="khpzh" onclick="kjpzAlert(this)" order="' + row.orderCode + '" voucher="' + row.stblg + '">' + value + '</a>';
+                          return '<a style="cursor: pointer" class="khpzh" order="' + row.orderCode + '" voucher="' + row.stblg + '">' + value + '</a>';
                       } else {
                           return '-'
                       }
@@ -211,6 +217,27 @@ class BalanceSheet extends React.Component {
       )
       $('#pzlb').show();
     }
+  }
+
+  kjpzAlert () { // 会计凭证弹窗;
+    var self = this;
+
+    $('.khpzh').on('click', function () {
+      var order = $(this).attr('order');
+      var voucher = $(this).attr('voucher');
+
+      $http('POST', {
+        addr: 'getVoucherByCode',
+        orderCode: order,
+        voucherCode: voucher
+      }, res => {
+        self.setState({
+          accountData: res.data
+        });
+
+        $('#getData5').modal('show')
+      })
+    })
   }
 
   changeDataType (type) {
@@ -352,6 +379,7 @@ class BalanceSheet extends React.Component {
             </div>
           </div>
         </div>
+        <AccountingVoucher accountData= { this.state.accountData } />
       </section>
     )
   }

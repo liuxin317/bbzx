@@ -3,7 +3,7 @@ import $ from 'jquery';
 import { $http } from '../common/http.js';
 import Store from '../stores/store.js';
 import types from '../actionTypes/types.js';
-require('../styles/bootstrap/js/bootstrap.min');
+import { Tooltip } from 'antd';
 
 class Linkage extends React.Component {
   constructor (props) {
@@ -28,10 +28,6 @@ class Linkage extends React.Component {
       pageSize: 20000000,
       pageNumber: 1
     })
-
-    setTimeout(() => {
-      $("[data-toggle='tooltip']").tooltip();
-    }, 1000)
   }
 
   componentWillReceiveProps () {
@@ -114,7 +110,7 @@ class Linkage extends React.Component {
       } else {
         this.props.chooseCompany(item);
       }
-      
+
     }
   }
 
@@ -163,9 +159,13 @@ class Linkage extends React.Component {
                       ?
                       ''
                       :
-                      <li key={item.key} onClick={this.selTenant.bind(this,item)}>
-                          <a key={item.key} href="javascript: " className="data-toggle-tooltip" data-toggle="tooltip"  title={item.tenantName}>{item.tenantName}</a>
+                      <Tooltip key={item.key} title={ item.tenantName }>
+                      <li onClick={this.selTenant.bind(this,item)}>
+                          <a href="javascript: ">
+                              {item.tenantName}
+                          </a>
                       </li>
+                      </Tooltip>
                     )
                   })
                   : ''
@@ -193,9 +193,13 @@ class Linkage extends React.Component {
                       ?
                       ''
                       :
-                      <li key={item.key} onClick={this.selCompany.bind(this, item)}>
-                          <a key={item.key} href="javascript: " className="data-toggle-tooltip" data-toggle="tooltip"  title={item.companyName}>{item.companyName}</a>
+                      <Tooltip key={item.key} title={ item.companyName }>
+                      <li onClick={this.selCompany.bind(this, item)}>
+                          <a href="javascript: ">
+                            {item.companyName}
+                          </a>
                       </li>
+                      </Tooltip>
                     )
                   })
                   : ''

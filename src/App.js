@@ -1,3 +1,4 @@
+require('../node_modules/antd/dist/antd.css');
 require('styles/bootstrap/css/bootstrap.min.css');
 require('styles/bootstrap-table/bootstrap-table.css');
 require('styles/datepicker/bootstrap-datetimepicker.css');
@@ -6,12 +7,14 @@ require('styles/views.css');
 require('styles/report.css');
 
 import React, { Component } from 'react';
+import 'babel-runtime/core-js/promise';
+import 'babel-polyfill';
 
 // 路由相关
 import createHistory from 'history/createBrowserHistory';
 // import { Route } from 'react-router';
 // import { ConnectedRouter, push } from 'react-router-redux';
-import {HashRouter as Router, Route, Link} from 'react-router-dom'
+import {HashRouter as Router, Route, Link} from 'react-router-dom';
 
 // 组件相关
 import Load from './common/Loading';

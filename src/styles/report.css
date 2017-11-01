@@ -932,3 +932,20 @@ tbody tr:nth-child(2n+1) {
 .fixed-table-pagination .jump-wrap {
   margin-left: 0;
 }
+.fixed-table-loading {
+  padding-top: 15px;
+}
+.ant-tooltip-inner {
+  font-size: 15px;
+  background-color: #69b3ff;
+}
+.ant-tooltip-placement-top .ant-tooltip-arrow,
+.ant-tooltip-placement-topLeft .ant-tooltip-arrow,
+.ant-tooltip-placement-topRight .ant-tooltip-arrow {
+  border-top-color: #69b3ff;
+}
+.ant-tooltip-placement-bottom .ant-tooltip-arrow,
+.ant-tooltip-placement-bottomLeft .ant-tooltip-arrow,
+.ant-tooltip-placement-bottomRight .ant-tooltip-arrow {
+  border-bottom-color: #69b3ff;
+}

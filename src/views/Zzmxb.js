@@ -84,8 +84,8 @@ export default class Kmyeb extends Component {
     let endTime = document.getElementById('endTime').value.replace(/-/g, '');
 
     // 获取链接
-    $http.get('/reportSapSource').then(res => {
-      this.setState({iframeHost: res.url});
+    $.getJSON('/reportSapSource', res => {
+      this.setState({iframeHost: res.url})
     })
 
     this.setState({startTime, endTime});

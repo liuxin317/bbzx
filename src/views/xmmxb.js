@@ -61,12 +61,16 @@ class BalanceSheet extends React.Component {
           this.state.xmCode.forEach((item) => {
             xmCode += item.code + ';'
           })
+
+          xmCode = xmCode.substr(0, xmCode.length - 1)
         }
         let cbCode = '';
         if (this.state.cbCode.length) {
           this.state.cbCode.forEach((item) => {
             cbCode += item.code + ';'
           })
+
+          cbCode = cbCode.substr(0, cbCode.length -1)
         }
 
         $('#xmmxTable').html("");
