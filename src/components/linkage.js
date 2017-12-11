@@ -1,9 +1,10 @@
 import React from 'react';
 import $ from 'jquery';
-import { $http } from '../common/http.js';
-import Store from '../stores/store.js';
-import types from '../actionTypes/types.js';
-import { Tooltip } from 'antd';
+import { $http } from '../common/http';
+import Store from '../stores/store';
+import types from '../actionTypes/types';
+import Tooltip from '../components/Tooltip';
+// import { Tooltip } from 'antd';
 
 class Linkage extends React.Component {
   constructor (props) {
@@ -153,19 +154,19 @@ class Linkage extends React.Component {
             <ul className="dropdown-menu">
               <input style={{width:'100%'}} onKeyUp={this.searchTenantList.bind(this)} placeholder="输入关键字查询" />
                 {
-                  soltsukolist ? soltsukolist.map((item) => {
+                  soltsukolist ? soltsukolist.map((item, index) => {
                     return (
                       item.display
                       ?
                       ''
                       :
-                      <Tooltip key={item.key} title={ item.tenantName }>
-                      <li onClick={this.selTenant.bind(this,item)}>
+                      <li key={ index } onClick={this.selTenant.bind(this,item)}>
+                        <Tooltip title={item.tenantName}>
                           <a href="javascript: ">
-                              {item.tenantName}
+                            {item.tenantName}
                           </a>
+                        </Tooltip>
                       </li>
-                      </Tooltip>
                     )
                   })
                   : ''
@@ -187,19 +188,19 @@ class Linkage extends React.Component {
             <ul className="dropdown-menu">
               <input style={{width:'100%'}} onKeyUp={this.searchCompanyList.bind(this)} placeholder="输入关键字查询" />
               {
-                  companylist ? companylist.map((item) => {
+                  companylist ? companylist.map((item, index) => {
                     return (
                       item.display
                       ?
                       ''
                       :
-                      <Tooltip key={item.key} title={ item.companyName }>
-                      <li onClick={this.selCompany.bind(this, item)}>
+                      <li key={ index } onClick={this.selCompany.bind(this, item)}>
+                        <Tooltip title={item.companyName}>
                           <a href="javascript: ">
                             {item.companyName}
                           </a>
+                        </Tooltip>
                       </li>
-                      </Tooltip>
                     )
                   })
                   : ''

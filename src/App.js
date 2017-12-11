@@ -1,4 +1,4 @@
-require('../node_modules/antd/dist/antd.css');
+// require('../node_modules/antd/dist/antd.css');
 require('styles/bootstrap/css/bootstrap.min.css');
 require('styles/bootstrap-table/bootstrap-table.css');
 require('styles/datepicker/bootstrap-datetimepicker.css');

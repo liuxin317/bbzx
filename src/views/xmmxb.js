@@ -372,7 +372,7 @@ class BalanceSheet extends React.Component {
     return (
       <section>
         <div className="tab-pane" id="zcfz">
-          <div className="v-middle" id="xmmx">
+          <div className="v-middle" id="xmmx" style={{ width: '1320px' }}>
             <ToDoLinkAge style="link-age-style" chooseCompany={ this.getChooseCompany.bind(this) } clearData={ this.clearData.bind(this) } />
             <div className="searchblock">
               <span className="pull-left v-middle">

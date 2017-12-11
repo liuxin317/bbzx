@@ -1,4 +1,4 @@
-import { Tooltip } from 'antd';
+import Tooltip from '../components/Tooltip';
 
 import React from 'react';
 import $ from 'jquery';
@@ -80,7 +80,7 @@ class AccountingVoucher extends React.Component {
               elimination === 0 ? <div className="signet"></div> : ''
             }
             <div className="modal-body">
-              <div style={{ overflow: 'auto' }}>
+              <div>
                 {
                   accHead.map((item)=> {
                     return (
@@ -92,23 +92,20 @@ class AccountingVoucher extends React.Component {
                           item.key.indexOf('订单号') > -1
                           ?
                           <a target="_blank" href={ '/csc-administration/views/kjfwdd.html?' + item.value + '&orderId=' + orderId } style={{ color: '#333' }}>
-                            <Tooltip title={ item.value }>
-                              <span className="data-toggle-tooltip kjpz-col">
-                                {item.value}
-                              </span>
-                            </Tooltip>
+                            <span className="data-toggle-tooltip kjpz-col">
+                              <Tooltip title={ item.value }>{item.value}</Tooltip>
+                            </span>
                           </a>
                           :
-                          <Tooltip title={ item.value }>
                             <span className="data-toggle-tooltip kjpz-col">
-                              {item.value}
+                              <Tooltip title={ item.value }> {item.value}</Tooltip>
                             </span>
-                          </Tooltip>
                         }
                       </div>
                     )
                  })
                 }
+                <div className="clear"></div>
               </div>
               <div style={{ overflow: 'auto' }}>
                 <table style={{ width: '100%' }} className="text-center m-t table">
@@ -129,9 +126,7 @@ class AccountingVoucher extends React.Component {
                             {
                               item.map((val, idx) => {
                                 return (
-                                  <Tooltip title={ val }>
-                                    <td key={ idx } style={{ whiteSpace: 'nowrap' }} className="data-toggle-tooltip">{ val }</td>
-                                  </Tooltip>
+                                  <td key={ idx } style={{ whiteSpace: 'nowrap' }} className="data-toggle-tooltip"><Tooltip title={ val }>{ val }</Tooltip></td>
                                 )
                               })
                             }

@@ -1,12 +1,9 @@
-import 'core-js/fn/object/assign';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { Provider } from 'react-redux';
 import Store from './stores/store.js';
 import types from './actionTypes/types.js';
-import 'babel-runtime/core-js/promise';
-import 'babel-polyfill';
 
 //action请求
 Store.dispatch({ type: types.maskStatus, payload: true })

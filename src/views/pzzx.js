@@ -16,7 +16,9 @@ class BalanceSheet extends React.Component {
       host: window.location.protocol+'//'+window.location.host+'/csc-administration/download/', // 下载域名路径
       dataType: 0, //查询类型;
       dataTypeName: '记账日期', //类型名称;
-      accountData: '' // 凭证号弹窗;
+      accountData: '', // 凭证号弹窗;
+      sort: '', // 排序名称
+      order: '' // 排序方式
     }
   }
 
@@ -86,8 +88,11 @@ class BalanceSheet extends React.Component {
           },
           queryParams: function getParams(params) {
               var query = {};
-              //params obj
-              // query.companyId = 2000;
+              self.setState({
+                sort: params.sort,
+                order: params.order
+              });
+
               query.addr = 'getVoucherRptList';
               query.token = getToken;
               query.date = (new Date().toGMTString());
@@ -259,6 +264,8 @@ class BalanceSheet extends React.Component {
         orderCode: $('#kjpzOrderCode').val().trim() == '服务订单号' ? '' : $('#kjpzOrderCode').val().trim(),
         voucherCode: $('#kjpzVoucherCode').val().trim() == '会计凭证号' ? '' : $('#kjpzVoucherCode').val().trim(),
         startDate: $('#startTime').val(),
+        sort: this.state.sort,
+        order: this.state.order,
         endDate: $('#endTime').val(),
         tenantId: this.state.chooseCompanyData.tenantId
       }, data => {
@@ -280,6 +287,8 @@ class BalanceSheet extends React.Component {
         orderCode: $('#kjpzOrderCode').val().trim() == '服务订单号' ? '' : $('#kjpzOrderCode').val().trim(),
         voucherCode: $('#kjpzVoucherCode').val().trim() == '会计凭证号' ? '' : $('#kjpzVoucherCode').val().trim(),
         startDate: $('#startTime').val(),
+        sort: this.state.sort,
+        order: this.state.order,
         endDate: $('#endTime').val(),
         tenantId: this.state.chooseCompanyData.tenantId
       }, data => {
@@ -300,6 +309,8 @@ class BalanceSheet extends React.Component {
         dataType: this.state.dataType,
         orderCode: $('#kjpzOrderCode').val().trim() == '服务订单号' ? '' : $('#kjpzOrderCode').val().trim(),
         voucherCode: $('#kjpzVoucherCode').val().trim() == '会计凭证号' ? '' : $('#kjpzVoucherCode').val().trim(),
+        sort: this.state.sort,
+        order: this.state.order,
         startDate: $('#startTime').val(),
         endDate: $('#endTime').val(),
         tenantId: this.state.chooseCompanyData.tenantId
@@ -317,7 +328,7 @@ class BalanceSheet extends React.Component {
     return (
       <section>
         <div className="tab-pane" id="zcfz">
-          <div className="v-middle">
+          <div className="v-middle" style={{ width: '1320px' }}>
             <ToDoLinkAge style="link-age-style" chooseCompany={ this.getChooseCompany.bind(this) } clearData={ this.clearData.bind(this) } />
 
             <div className="pull-left" style={{ marginRight: '5px' }}>
